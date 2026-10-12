@@ -1,22 +1,29 @@
 # CrewAI Build Report
 
+**Name:** Sneha Latha Astum
+**Topic I used:** How small teams can use AI agents in data science
+
 ## 1. What I Changed
 
-For this assignment, I worked with the CrewAI starter kit, which contains three agents: a Research Analyst, a Technical Writer, and an Editor.
+## 1. What I Changed
 
-I modified the **Editor task instructions** in `main.py`. Originally, the task asked the Editor to tighten the explainer and mark claims needing sources. I expanded these instructions to emphasize clarity, grammar, readability, preservation of meaning, and identification of unsupported factual claims. I also explicitly instructed the Editor not to invent statistics, citations, or evidence.
+For this assignment, I used the CrewAI starter kit, which contains three agents: a Research Analyst, a Technical Writer, and an Editor. I selected the topic "How small teams can use AI agents in data science" to understand how multiple AI agents collaborate to complete a research and writing task.
 
-I chose this modification because the original output included several numerical claims without verifiable supporting references.
+I made one meaningful modification in the `main.py` file, specifically in the `editing_task` section. The original Editor task focused on improving the explanation and identifying claims that required sources. I expanded the task description to emphasize clarity, grammar, readability, and preserving the original meaning. I also instructed the Editor to mark unsupported factual claims with `[source needed]` and avoid inventing statistics, citations, or evidence.
+
+I chose this modification because the original generated explanation contained numerical claims without verifiable supporting references. My goal was to make the Editor more cautious about factual accuracy and evaluate whether clearer instructions would improve the final output.
 
 ## 2. How CrewAI Works
 
-CrewAI organizes AI agents into a team, with each agent assigned a specific role and task.
+CrewAI is a framework that allows multiple AI agents to collaborate on tasks using clearly defined roles and responsibilities. The three main components I worked with were Agents, Tasks, and Crew.
 
-In my workflow, the Research Analyst collects five key facts and two open questions about how small teams can use AI agents in data science. The Technical Writer uses the research brief to prepare an approximately 250-word explanation. Finally, the Editor reviews the explanation and identifies claims that need supporting evidence.
+An **Agent** represents a specialist with a particular role, goal, and backstory. In my project, the Research Analyst gathers information, the Technical Writer prepares an explanation, and the Editor reviews the written content. These roles help the language model understand what each agent is expected to accomplish.
 
-The workflow uses `Process.sequential`, meaning the tasks execute in order and later tasks can use the outputs of earlier tasks.
+A **Task** defines the work assigned to an agent. Each task includes a description and an `expected_output` that explains what the result should look like. In my workflow, the Research Analyst produces a research brief containing five key facts and two open questions. The Technical Writer uses that information to prepare an approximately 250-word explainer. The Editor then improves the writing and identifies unsupported claims.
 
-The model is accessed through Groq using the CrewAI `LLM` configuration.
+A **Crew** connects the agents and tasks into a workflow. My project uses `Process.sequential`, meaning the tasks run in a specific order, and each task can use information produced by previous tasks.
+
+The agents use a language model accessed through Groq using CrewAI's `LLM` configuration. My modification worked by changing the instructions provided to the Editor without changing the number of agents or the execution order. However, the results showed that instructions alone do not guarantee accurate fact-checking.
 
 ## 3. Evidence
 
@@ -34,11 +41,21 @@ The two outputs also differed in content, so the differences cannot be attribute
 
 ## 4. Choosing a Framework
 
-CrewAI is suitable for this assignment because it supports role-based collaboration and sequential task execution. The framework makes it straightforward to assign research, writing, and editing responsibilities to separate agents.
+I would choose CrewAI for projects where multiple AI agents need to collaborate on a task with clearly defined responsibilities. In this assignment, CrewAI allowed me to organize the workflow into three specialized roles: Research Analyst, Technical Writer, and Editor. Each agent completed a specific task, and its output contributed to the next stage. This structure made the workflow easier to understand and helped me identify which part of the process needed improvement.
 
-Compared with a single-prompt approach, this structure provides a clearer division of responsibilities and makes it easier to inspect the results of individual tasks.
+For example, in a data science project, CrewAI could support a research workflow in which one agent collects background information, another prepares a technical summary, and a third reviews the results. However, human verification would still be necessary, especially when the output contains factual or numerical claims.
 
-For a project involving multiple specialized roles, I would consider CrewAI because its agent-and-task structure is easy to understand. For workflows requiring detailed custom control, another orchestration framework might be more appropriate.
+Compared with CrewAI, **LangGraph** provides more explicit control over the workflow using nodes, edges, and shared state. Based on the class demonstration, LangGraph also supports human approval checkpoints before certain actions are executed. This would be useful when a data science workflow involves sensitive information or important decisions.
+
+CrewAI would be easier for me to use when building a straightforward team of specialized agents. LangGraph would be more suitable when I need complex branching, repeated checks, or human approval before continuing.## 4. Choosing a Framework
+
+I would choose CrewAI for projects where multiple AI agents need to collaborate on a task with clearly defined responsibilities. In this assignment, CrewAI allowed me to organize the workflow into three specialized roles: Research Analyst, Technical Writer, and Editor. Each agent completed a specific task, and its output contributed to the next stage. This structure made the workflow easier to understand and helped me identify which part of the process needed improvement.
+
+For example, in a data science project, CrewAI could support a research workflow in which one agent collects background information, another prepares a technical summary, and a third reviews the results. However, human verification would still be necessary, especially when the output contains factual or numerical claims.
+
+Compared with CrewAI, **LangGraph** provides more explicit control over the workflow using nodes, edges, and shared state. Based on the class demonstration, LangGraph also supports human approval checkpoints before certain actions are executed. This would be useful when a data science workflow involves sensitive information or important decisions.
+
+CrewAI would be easier for me to use when building a straightforward team of specialized agents. LangGraph would be more suitable when I need complex branching, repeated checks, or human approval before continuing.
 
 ## 5. Verification and AI Use
 
