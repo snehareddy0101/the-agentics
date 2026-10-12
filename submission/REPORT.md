@@ -3,7 +3,6 @@
 **Name:** Sneha Latha Astum
 **Topic I used:** How small teams can use AI agents in data science
 
-## 1. What I Changed
 
 ## 1. What I Changed
 
